@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -11,57 +12,42 @@ import Search from './Search';
 import Playlist from './Playlist';
 import Artist from './Artist';
 import Footer from './Footer';
+import { withAuth0 } from '@auth0/auth0-react';
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
+import Profile from './Profile';
 
 class App extends React.Component {
-
   render() {
-
     return (
-      <div className="App">
-
-
-
+      <>
+        {this.props.auth0.isAuthenticated ? <LogoutButton /> : <LoginButton />}
+        {this.props.auth0.isAuthenticated ? <Profile /> : <h2>Please login</h2>}
         <Router>
-        <Header/>
+          <Header />
           <Routes>
-
             <Route
-              //  is the homepage
               exact path="/"
-              //the homepage will render bestbooks js
               element={<Search />}
             > </Route>
-
             <Route
-              //  is the homepage
               path="/artist"
-              //the homepage will render bestbooks js
               element={<Artist />}
-              > </Route>
-
+            > </Route>
             <Route
-              //  is the homepage
               path="/playlist"
-              //the homepage will render bestbooks js
               element={<Playlist />}
             > </Route>
-
             <Route
-              //  is the homepage
               path="/about-us"
-              //the homepage will render bestbooks js
               element={<AboutUs />}
-              > </Route>
-
+            > </Route>
           </Routes>
-<Footer/>
-
+          <Footer />
         </Router>
-
-      </div>
+      </>
     );
   }
 }
 
-
-export default App;
+export default withAuth0(App);
