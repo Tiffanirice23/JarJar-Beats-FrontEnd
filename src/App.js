@@ -5,11 +5,12 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import Header from './Header'
 import AboutUs from './AboutUs';
 import Search from './Search';
 import Playlist from './Playlist';
 import Artist from './Artist';
-
+import Footer from './Footer';
 
 class App extends React.Component {
 
@@ -17,11 +18,11 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <header className="App-header">
 
-        </header>
+
 
         <Router>
+        <Header/>
           <Routes>
 
             <Route
@@ -36,7 +37,7 @@ class App extends React.Component {
               path="/artist"
               //the homepage will render bestbooks js
               element={<Artist />}
-            > </Route>
+              > </Route>
 
             <Route
               //  is the homepage
@@ -50,9 +51,10 @@ class App extends React.Component {
               path="/about-us"
               //the homepage will render bestbooks js
               element={<AboutUs />}
-            > </Route>
+              > </Route>
 
           </Routes>
+<Footer/>
 
         </Router>
 
