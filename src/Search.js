@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import { Card, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button'
-import Artist from './Artist.js'
-import Playlist from './Playlist.js'
+// import Artist from './Artist.js'
+// import Playlist from './Playlist.js'
 import SongCard from './SongCard.js'
 
 
@@ -44,7 +44,7 @@ class Search extends React.Component {
             console.log('error.message: ', error.message);
             this.setState({
                 error: true,
-                errorMessage: 'An error Occured: ${error.response.status}'
+                errorMessage: `An error Occured: ${error.response.status}`
             });
         }
     }
