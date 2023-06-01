@@ -22,6 +22,7 @@ class Search extends React.Component {
       artist: '',
       description: '',
       location: '',
+      id: '',
       title: '',
       album: '',
       image: '',
@@ -136,6 +137,8 @@ class Search extends React.Component {
       if (doesUserHavePlaylist) {
         console.log('creating new playlist');
         let userPlaylist = {
+          id: '',
+          name: '',
           title: '',
           email: '',
           songs: []
@@ -157,11 +160,12 @@ class Search extends React.Component {
         return (
           <SongCard
             key={idx}
+            id={artist.id}
             artist={artist}
             title={artist.title}
             album={artist.album}
             image={artist.image}
-            name={this.state.artist}
+            name={artist.name}
             addFavorite={this.addFavorite}
 
           />
