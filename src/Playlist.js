@@ -2,11 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import { withAuth0 } from "@auth0/auth0-react";
 // import search from './search.js'
-import { Form } from 'react-bootstrap';
-import { Card } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+// import { Form } from 'react-bootstrap';
+// import { Card } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
 
 class Playlist extends React.Component {
+
+  // class Playlist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -109,7 +111,6 @@ class Playlist extends React.Component {
 
   componentDidMount() {
     this.getPlaylist();
+  }
 }
-}
-
 export default withAuth0(Playlist);
