@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button'
 // import Artist from './Artist.js'
 // import Playlist from './Playlist.js'
 import SongCard from './SongCard.js'
+import { withAuth0 } from '@auth0/auth0-react';
 
 
 class Search extends React.Component {
@@ -24,8 +25,54 @@ class Search extends React.Component {
       title: '',
       album: '',
       image: '',
+      favorites: [],
+      userPlaylist: undefined
     }
   }
+  getPlaylist = async () => {
+    try {
+      if (this.props.auth0.isAuthenticated) {
+        let email = this.props.auth0.user.email
+
+        const res = await this.props.auth0.getIdTokenClaims();
+        const jwt = res.__raw;
+        const config = {
+          method: 'get',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: `/playlist?email=${this.props.user.email}`,
+          headers: { "Authorization": `Bearer ${jwt}` }
+
+        }
+        const results = await axios(config);
+        console.log(results.data);
+        this.setState({
+          userPlaylist: results.data
+        });
+        if (results.data.length === 0) {
+          // Create a new playlist if the user doesn't have one
+          const createPlaylistConfig = {
+            method: 'post',
+            baseURL: process.env.REACT_APP_SERVER,
+            url: `/playlist?email=${this.props.user.email}`,
+            headers: { "Authorization": `Bearer ${jwt}` },
+            data: {
+              email: email,
+              playlistName: 'My Playlist'
+            }
+          };
+
+          await axios(createPlaylistConfig);
+        }
+
+        return true;
+      }
+
+
+    } catch (err) {
+      console.log("nay nay", err.response);
+    }
+
+  };
   handleSearchSubmit = async (event) => {
     event.preventDefault();
     this.getArtist();
@@ -33,7 +80,7 @@ class Search extends React.Component {
   getArtist = async () => {
     try {
       let artistUrl = `${process.env.REACT_APP_SERVER}/searchSongs?name=${this.state.artist}`;
-      // console.log('this is the artistUrl: ', artistUrl);
+      console.log('this is the artistUrl: ', artistUrl);
       let artistResponse = await axios.get(artistUrl);
       // console.log('this is the artistResponse: ', artistResponse);
       let artistData = artistResponse.data;
@@ -55,25 +102,62 @@ class Search extends React.Component {
     }
   };
 
+//   postPlaylist = async (playlist) => {
+//     let playlistURL =
+// }
+
   changeArtistInput = (event) => {
     this.setState({
       artist: event.target.value
     });
   };
+
+  addFavorite = (songCard) => {
+    const { favorites } = this.state;
+    favorites.push(songCard);
+    this.setState({ favorites });
+  };
+
+  componentDidMount = async () => {
+    if (this.props.auth0.isAuthenticated) {
+      //check to see if user who is logged in has a playlist in the database
+      // if they do have one get playlist will put it in state and return true
+      let doesUserHavePlaylist = this.getPlaylist();
+      // create playlist if user does not have one 
+      if (doesUserHavePlaylist) {
+        let userPlaylist = {
+          title: '',
+          email: '',
+          songs: []
+        }
+
+      }
+    }
+  }
+
   render() {
-    let artist = [];
-    console.log(this.state.artistData);
+    // console.log(this.props.auth0.user);
+    let artists = [];
+    // console.log(this.state.artistData);
     if (this.state.artistData.length) {
-      artist = this.state.artistData.map((artist, idx) => {
+      artists = this.state.artistData.map((artist, idx) => {
+        // const ( title, album, && image ) = artist;
+        // if (title && album && image) (
 
         return (
           <SongCard
             key={idx}
+            artist={artist}
             title={artist.title}
             album={artist.album}
             image={artist.image}
+            onClick={() => this.addFavorite(artist)}
+
           />
         )
+        // ) else (
+        //     return null;
+        // )
       });
     }
     return (
@@ -90,7 +174,7 @@ class Search extends React.Component {
         {this.state.error ? <p>{this.state.errorMessage}</p> :
           this.state.haveArtistData &&
           <main>
-            {artist}
+            {artists}
           </main>
         }
       </>
@@ -99,4 +183,4 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+export default withAuth0(Search);
