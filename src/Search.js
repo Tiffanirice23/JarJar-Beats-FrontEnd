@@ -9,94 +9,94 @@ import SongCard from './SongCard.js'
 
 
 class Search extends React.Component {
-    // render() {
-    constructor(props) {
-        super(props);
-        this.state = {
-            artistData: [],
-            artistDataObj: {},
-            artistDataArray: [],
-            error: false,
-            haveArtistData: false,
-            artist: '',
-            description: '',
-            location: '',
-            title: '',
-            album: '',
-            image: '',
-        }
+  // render() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      artistData: [],
+      artistDataObj: {},
+      artistDataArray: [],
+      error: false,
+      haveArtistData: false,
+      artist: '',
+      description: '',
+      location: '',
+      title: '',
+      album: '',
+      image: '',
     }
-    handleSearchSubmit = async (event) => {
-        event.preventDefault();
-        this.getArtist();
+  }
+  handleSearchSubmit = async (event) => {
+    event.preventDefault();
+    this.getArtist();
+  }
+  getArtist = async () => {
+    try {
+      let artistUrl = `${process.env.REACT_APP_SERVER}/searchSongs?name=${this.state.artist}`;
+      // console.log('this is the artistUrl: ', artistUrl);
+      let artistResponse = await axios.get(artistUrl);
+      // console.log('this is the artistResponse: ', artistResponse);
+      let artistData = artistResponse.data;
+      this.setState({
+        artistData: artistData,
+        error: false,
+        haveArtistData: true
+      })
+      console.log('this is the artistData: ', artistData);
+      // console.log('this is the album: ', album);
+      // console.log('this is the artistData: ', artistData);
+    } catch (error) {
+      console.log('error: ', error);
+      console.log('error.message: ', error.message);
+      this.setState({
+        error: true,
+        errorMessage: `An error Occured: ${error.response}`
+      });
     }
-    getArtist = async () => {
-        try {
-            let artistUrl = `${process.env.REACT_APP_SERVER}/searchSongs?name=${this.state.artist}`;
-            // console.log('this is the artistUrl: ', artistUrl);
-            let artistResponse = await axios.get(artistUrl);
-            // console.log('this is the artistResponse: ', artistResponse);
-            let artistData = artistResponse.data;
-            this.setState({
-                artistData: artistData,
-                error: false,
-                haveArtistData: true
-            })
-            console.log('this is the artistData: ', artistData);
-            // console.log('this is the album: ', album);
-            // console.log('this is the artistData: ', artistData);
-        } catch (error) {
-            console.log('error: ', error);
-            console.log('error.message: ', error.message);
-            this.setState({
-                error: true,
-                errorMessage: `An error Occured: ${error.response}`
-            });
-        }
-    };
+  };
 
-    changeArtistInput = (event) => {
-        this.setState({
-            artist: event.target.value
-        });
-    };
-    render() {
-        let artist = [];
-        console.log(this.state.artistData);
-        if (this.state.artistData.length) {
-            artist = this.state.artistData.map((artist, idx) => {
+  changeArtistInput = (event) => {
+    this.setState({
+      artist: event.target.value
+    });
+  };
+  render() {
+    let artist = [];
+    console.log(this.state.artistData);
+    if (this.state.artistData.length) {
+      artist = this.state.artistData.map((artist, idx) => {
 
-                return (
-                    <SongCard
-                        key={idx}
-                        title={artist.title}
-                        album={artist.album}
-                        image={artist.image}
-                    />
-                )
-            });
-        }
         return (
-            <>
-                <header>
-                    <h1>Search Your Favorites!!</h1>
-                    <Form onSubmit={this.handleSearchSubmit}>
-                        <label>
-                            <input name="artist" onChange={this.changeArtistInput} />
-                        </label>
-                        <Button type="submit" className="button">Search</Button>
-                    </Form>
-                </header>
-                {this.state.error ? <p>{this.state.errorMessage}</p> :
-                    this.state.haveArtistData &&
-                    <main>
-                        {artist}
-                    </main>
-                }
-            </>
-        );
-
+          <SongCard
+            key={idx}
+            title={artist.title}
+            album={artist.album}
+            image={artist.image}
+          />
+        )
+      });
     }
+    return (
+      <>
+        <header>
+          <h1>Search Your Favorites!!</h1>
+          <Form onSubmit={this.handleSearchSubmit}>
+            <label>
+              <input name="artist" onChange={this.changeArtistInput} />
+            </label>
+            <Button type="submit" className="button">Search</Button>
+          </Form>
+        </header>
+        {this.state.error ? <p>{this.state.errorMessage}</p> :
+          this.state.haveArtistData &&
+          <main>
+            {artist}
+          </main>
+        }
+      </>
+    );
+
+  }
 }
 
 export default Search;
