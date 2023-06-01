@@ -102,13 +102,15 @@ class Search extends React.Component {
     }
   };
 
+  // postPlaylist = async (playlist) => {
+  //   // add playlist to the database using a post request
+  //   // once it is retrived from data base set it into state
+  //   let playlistURL = 
+
   handleSearchSubmit = async (event) => {
     event.preventDefault();
     this.getArtist();
   }
-
-  //   postPlaylist = async (playlist) => {
-  //     let playlistURL =
   // }
 
   changeArtistInput = (event) => {
