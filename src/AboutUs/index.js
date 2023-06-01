@@ -29,7 +29,7 @@ class AboutUs extends React.Component {
     render() {
         return (
             <>
-            <h1> Click on an Image & get to know us!</h1>
+                <h1> Click on an Image & get to know us!</h1>
                 <div className='AboutContainer'>
                     <img
                         src="./images/ashley.jpeg"
@@ -45,7 +45,7 @@ class AboutUs extends React.Component {
                         alt="Pic of Anthony"
                         onClick={() => this.renderModal({
                             title: 'My name is Anthony',
-                            body: 'This is my text body for Anthony',
+                            body: 'Anthony is a software engineer from Spokane, Washington. Anthony was in a university taking computer science but his expectations were not being met. Anthony has heard good things about Code Fellows and wanted to pursue new opportunities. Anthony is super excited to start this new path in his life.',
                         })}
                         className="profileImg"
                     />
@@ -59,15 +59,15 @@ class AboutUs extends React.Component {
                         className="profileImg"
                     />
 
-                        <img
-                            src="./images/jared.jpg"
-                            alt="Pic of Jared"
-                            onClick={() => this.renderModal({
-                                title: 'My name is Jared',
-                                body: 'This is my text body for Andrew',
-                            })}
-                            className="profileImg"
-                            />
+                    <img
+                        src="./images/jared.jpg"
+                        alt="Pic of Jared"
+                        onClick={() => this.renderModal({
+                            title: 'My name is Jared',
+                            body: 'This is my text body for Andrew',
+                        })}
+                        className="profileImg"
+                    />
 
                     <img
                         src="./images/andrew.jpeg"
