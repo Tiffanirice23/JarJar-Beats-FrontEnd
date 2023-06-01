@@ -82,8 +82,8 @@ class AboutUs extends React.Component {
                         src="./images/dan.jpeg"
                         alt="Pic of Dan"
                         onClick={() => this.renderModal({
-                            title: 'My name is Dan',
-                            body: 'This is my text body for Dan',
+                            title: 'This is Dan',
+                            body: 'Dan is a 29 year old musician and outdoor enthusiest from Seattle. He plays in a band called The Boards. After 10 years of being a bike messenger in downtown Seattle he decided to switch to a career that wasn\'t so dangerous and allowed him to spend more time with his family and dogs. So far he has made sereral awesome projects with his Codefellows cohort and is exited for the future of his career.',
                         })}
                         className="profileImg"
                     />
