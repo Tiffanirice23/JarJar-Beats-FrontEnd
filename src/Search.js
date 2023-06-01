@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Form } from 'react-bootstrap';
+import { Form, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button'
 // import Artist from './Artist.js'
@@ -120,6 +120,7 @@ class Search extends React.Component {
     changeArtistInput = (event) => {
       this.setState({
         artist: event.target.value
+
       });
     };
 
@@ -151,30 +152,33 @@ class Search extends React.Component {
       this.postPlaylist(userPlaylist);
     }
 
-    render() {
-      // console.log(this.props.auth0.user);
-      let songCards = [];
-      console.log(this.state.artistData);
-      if (this.state.artistData.length > 0) {
-        songCards = this.state.artistData.map((artist, idx) => {
-          // const ( title, album, && image ) = artist;
-          // if (title && album && image) (
-          console.log(artist);
-          return (
-            <SongCard
-              key={idx}
-              artist={artist}
-              title={artist.title}
-              album={artist.album}
-              image={artist.image}
-              name={artist.name}
-              addFavorite={this.addFavorite}
+   render() {
+    // console.log(this.props.auth0.user);
+    let songCards = [];
+    console.log(this.state.artistData);
+    if (this.state.artistData.length > 0) {
+      songCards = this.state.artistData.map((artist, idx) => {
+        // const ( title, album, && image ) = artist;
+        // if (title && album && image) (
+        console.log(artist);
+        return (
+            <Col key={idx} className="mt-4">
+          <SongCard
+            key={idx}
+            id={artist.id}
+            artist={artist}
+            title={artist.title}
+            album={artist.album}
+            image={artist.image}
+            name={artist.name}
+            addFavorite={this.addFavorite}
 
-            />
-          )
-          // ) else (
-          //     return null;
-          // )
+          />
+          </Col>
+        )
+        // ) else (
+        //     return null;
+        // )
         });
       }
       return (

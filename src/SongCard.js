@@ -1,7 +1,8 @@
+// this mirrors the HornedBeast.js file
+
 import React from "react";
 import Card from "react-bootstrap/Card";
-// import { withAuth0 } from '@auth0/auth0-react';
-// import Typography from "react-bootstrap/Typography"
+import './SongCard.css'
 
 class SongCard extends React.Component {
   constructor(props) {
@@ -13,22 +14,22 @@ class SongCard extends React.Component {
   }
 
   render() {
-    return (
+return (
       <>
-        <Card className='Artist' style={{ width: '50%' }}>
-          <Card.Body>
-            <Card.Title>{this.props.title}</Card.Title>
-            <Card.Img src={this.props.image} style={{ width: '40%' }}></Card.Img>
-            <Card.Text onClick={() => this.props.addFavorite(this.props.artist)}>&#9825;</Card.Text>
-            <Card.Text>Artist: {this.props.name}</Card.Text>
-            <Card.Text>Album: {this.props.album}</Card.Text>
-          </Card.Body>
-        </Card>
-      </>
 
+    <Card className='Artist'>
+      <Card.Body>
+        <Card.Img src={this.props.image}></Card.Img>
+        <Card.Title>Song: {this.props.title}</Card.Title>
+        <Card.Title>Album: {this.props.album}</Card.Title>
+        <Card.Title>Artist: {this.props.name}</Card.Title>
+        <Card.Text onClick={() => this.props.addFavorite(this.props.artist)}>:heart:</Card.Text>
+      </Card.Body>
+      </Card>
+      </>
     )
   }
 }
-
+    
 export default SongCard;
 // export default withAuth0(SongCard);
