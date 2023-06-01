@@ -28,27 +28,9 @@ class Search extends React.Component {
     }
     handleSearchSubmit = async (event) => {
         event.preventDefault();
-        try {
-            let artistUrl = `${process.env.REACT_APP_SERVER}/searchSongs?name=${this.state.artist}`;
-            let artist = await axios.get(artistUrl);
-            this.setState({
-                artistData: artist.data[0],
-                error: false,
-                haveArtistData: true,
-            });
-            this.getArtist(artist.data[0])
-            // this.getSong()
-        }
-        catch (error) {
-            console.log('error: ', error);
-            console.log('error.message: ', error.message);
-            this.setState({
-                error: true,
-                errorMessage: `An error Occured: ${error.response.status}`
-            });
-        }
+        this.getArtist();
     }
-    getArtist = async (artist) => {
+    getArtist = async () => {
         try {
             let artistUrl = `${process.env.REACT_APP_SERVER}/searchSongs?name=${this.state.artist}`;
             // console.log('this is the artistUrl: ', artistUrl);
@@ -56,13 +38,20 @@ class Search extends React.Component {
             // console.log('this is the artistResponse: ', artistResponse);
             let artistData = artistResponse.data;
             this.setState({
-                artistData: artistData
+                artistData: artistData,
+                error: false,
+                haveArtistData: true
             })
             console.log('this is the artistData: ', artistData);
             // console.log('this is the album: ', album);
             // console.log('this is the artistData: ', artistData);
         } catch (error) {
-            console.log('Error getting Artist: ', error);
+            console.log('error: ', error);
+            console.log('error.message: ', error.message);
+            this.setState({
+                error: true,
+                errorMessage: `An error Occured: ${error.response}`
+            });
         }
     };
 
@@ -106,6 +95,7 @@ class Search extends React.Component {
                 }
             </>
         );
+
     }
 }
 
