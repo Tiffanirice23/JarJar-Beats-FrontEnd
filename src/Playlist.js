@@ -6,7 +6,6 @@ import { Form } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 
-
 class Playlist extends React.Component {
   constructor(props) {
     super(props);
@@ -112,4 +111,5 @@ class Playlist extends React.Component {
     this.getPlaylist();
 }
 }
+
 export default withAuth0(Playlist);
