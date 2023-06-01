@@ -17,10 +17,10 @@ class SongCard extends React.Component {
       <>
         <Card className='Artist' style={{ width: '50%' }}>
           <Card.Body>
-            <Card.Title>{this.props.artist}</Card.Title>
+            <Card.Title>{this.props.title}</Card.Title>
             <Card.Img src={this.props.image} style={{ width: '40%' }}></Card.Img>
-            <Card.Text onClick={() => this.addFavorite(this.props.artist)}>:heart:</Card.Text>
-            <Card.Text>Song: {this.props.title}</Card.Text>
+            <Card.Text onClick={() => this.props.addFavorite(this.props.artist)}>:heart:</Card.Text>
+            <Card.Text>Artist: {this.props.name}</Card.Text>
             <Card.Text>Album: {this.props.album}</Card.Text>
           </Card.Body>
         </Card>

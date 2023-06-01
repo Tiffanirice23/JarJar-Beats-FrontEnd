@@ -30,6 +30,8 @@ class Search extends React.Component {
     }
   }
   getPlaylist = async () => {
+    console.log('gettingPlaylist');
+    let userPlaylist = false;
     try {
       if (this.props.auth0.isAuthenticated) {
         let email = this.props.auth0.user.email
@@ -45,6 +47,7 @@ class Search extends React.Component {
         }
         const results = await axios(config);
         console.log(results.data);
+        userPlaylist = true;
         this.setState({
           userPlaylist: results.data
         });
@@ -63,20 +66,17 @@ class Search extends React.Component {
 
           await axios(createPlaylistConfig);
         }
-
-        return true;
       }
 
 
     } catch (err) {
       console.log("nay nay", err.response);
     }
+    return userPlaylist;
 
   };
-  handleSearchSubmit = async (event) => {
-    event.preventDefault();
-    this.getArtist();
-  }
+
+
   getArtist = async () => {
     try {
       let artistUrl = `${process.env.REACT_APP_SERVER}/searchSongs?name=${this.state.artist}`;
@@ -102,9 +102,14 @@ class Search extends React.Component {
     }
   };
 
-//   postPlaylist = async (playlist) => {
-//     let playlistURL =
-// }
+  handleSearchSubmit = async (event) => {
+    event.preventDefault();
+    this.getArtist();
+  }
+
+  //   postPlaylist = async (playlist) => {
+  //     let playlistURL =
+  // }
 
   changeArtistInput = (event) => {
     this.setState({
@@ -118,6 +123,8 @@ class Search extends React.Component {
     this.setState({ favorites });
   };
 
+  // postPlaylist = ()
+
   componentDidMount = async () => {
     if (this.props.auth0.isAuthenticated) {
       //check to see if user who is logged in has a playlist in the database
@@ -125,6 +132,7 @@ class Search extends React.Component {
       let doesUserHavePlaylist = this.getPlaylist();
       // create playlist if user does not have one 
       if (doesUserHavePlaylist) {
+        console.log('creating new playlist');
         let userPlaylist = {
           title: '',
           email: '',
@@ -137,13 +145,13 @@ class Search extends React.Component {
 
   render() {
     // console.log(this.props.auth0.user);
-    let artists = [];
-    // console.log(this.state.artistData);
-    if (this.state.artistData.length) {
-      artists = this.state.artistData.map((artist, idx) => {
+    let songCards = [];
+    console.log(this.state.artistData);
+    if (this.state.artistData.length > 0) {
+      songCards = this.state.artistData.map((artist, idx) => {
         // const ( title, album, && image ) = artist;
         // if (title && album && image) (
-
+        console.log(artist);
         return (
           <SongCard
             key={idx}
@@ -151,7 +159,8 @@ class Search extends React.Component {
             title={artist.title}
             album={artist.album}
             image={artist.image}
-            onClick={() => this.addFavorite(artist)}
+            name={this.state.artist}
+            addFavorite={this.addFavorite}
 
           />
         )
@@ -174,7 +183,7 @@ class Search extends React.Component {
         {this.state.error ? <p>{this.state.errorMessage}</p> :
           this.state.haveArtistData &&
           <main>
-            {artists}
+            {songCards}
           </main>
         }
       </>
