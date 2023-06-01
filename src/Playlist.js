@@ -4,6 +4,30 @@ import { withAuth0 } from "@auth0/auth0-react";
 // import search from './search.js'
 
 class Playlist extends React.Component {
+import { Form } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+
+
+class Playlist extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      favorites: []
+    };
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('!!!!!', e.target);
+    let playlistToUpdate = {
+      title: e.target.title.value || this.props.playlist.title,
+      // album: e.target.album.value || this.props.album.description,
+      // img: e.target.img || this.props.playlist
+    };
+    this.props.putPlaylist(playlistToUpdate)
+  }
+
   //if you send the email address as query with this request it will return only the playlists that were created by the user that logged in. 
   getPlaylist = async () => {
     try {
@@ -24,54 +48,70 @@ class Playlist extends React.Component {
       console.log("nay nay", err.response);
     }
   }
-  componentDidMount() {
-    this.getPlaylist();
+
+  postPlaylist = async (newPlaylist) => {
+
   }
-  render() {
-    console.log(this.props.auth0.user);
-    return (
-      <>
-        <p> Playlist </p>
-      </>
-    )
+
+  deletePlaylist = async (Playlist) => {
+
   }
-}
 
-{/* <h2>Favorites</h2>
-{
-  this.state.favorites.map((favorite, idx) => (
-    <div key={idx}>
-      <h3>{favorite.title}</h3>
-      <h4>{favorite.album}</h4>
-      <img src={favorite.image} />
-    </div>
-  ))
-}
+  putPlaylist = async (playlistToUpdate) => {
+    try {
+      if (this.props.auth0.isAuthenticated) {
+        const res = await this.props.auth0.getIdTokenClaims();
+        const jwt = res.__raw;
+        const config = {
+          method: 'put',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: '/playlist',
+          headers: { "Authorization": `Bearer ${jwt}` },
+          data: {
+            title: playlistToUpdate.title,
+          },
+        };
 
-render() {
-  const { favoriteData } = this.props;
+        const response = await axios(config);
+        console.log(response.data);
+      }
+    } catch (err) {
+      console.log("Error updating playlist:", err.response);
+    }
+  }
 
-  class Playlist extends React.Component {
-    handleFavorite = (data) => {
-      // Call the onFavorite function passed from the parent and pass the data
-      this.props.onFavorite(data);
+  handleUpdatePlaylist = async (index) => {
+    const playlistToUpdate = {
+      title: 'New Playlist Title', // Replace with the new title
     };
 
-  return (
-    <div>
-      <h2>Child Component</h2>
-      {favoriteData.map((item) => (
-        <div key={item.id}>
-          <h3>{item.title}</h3>
-          <p>{item.description}</p>
-          <button onClick={() => this.handleFavorite(item)}>
-            {favoriteData.some((favorite) => favorite.id === item.id) ? 'Unfavorite' : 'Favorite'}
-          </button>
-        </div>
-      ))}
-    </div>
-  );
-} */}
-// }
+    try {
+      if (this.props.auth0.isAuthenticated) {
+        const res = await this.props.auth0.getIdTokenClaims();
+        const jwt = res.__raw;
+        const config = {
+          method: 'put',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: '/playlist',
+          headers: { "Authorization": `Bearer ${jwt}` },
+          data: playlistToUpdate,
+        };
+
+        const response = await axios(config);
+        console.log(response.data);
+
+        // Update the state with the updated playlist
+        const updatedFavorites = [...this.state.favorites];
+        updatedFavorites[index].title = playlistToUpdate.title;
+        this.setState({ favorites: updatedFavorites });
+      }
+    } catch (err) {
+      console.log("Error updating playlist:", err.response);
+    }
+  };
+
+  componentDidMount() {
+    this.getPlaylist();
+}
 
 export default withAuth0(Playlist);
