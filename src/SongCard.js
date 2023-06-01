@@ -1,12 +1,14 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+// import { withAuth0 } from '@auth0/auth0-react';
 // import Typography from "react-bootstrap/Typography"
 
 class SongCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      likes: 0
+      favorites: [],
+      // artist: this.state.artist
     }
   }
 
@@ -15,8 +17,9 @@ class SongCard extends React.Component {
       <>
         <Card className='Artist' style={{ width: '50%' }}>
           <Card.Body>
-            <Card.Img src={this.props.image} style={{ width: '40%' }}></Card.Img>
             <Card.Title>{this.props.artist}</Card.Title>
+            <Card.Img src={this.props.image} style={{ width: '40%' }}></Card.Img>
+            <Card.Text onClick={() => this.addFavorite(this.props.artist)}>:heart:</Card.Text>
             <Card.Text>Song: {this.props.title}</Card.Text>
             <Card.Text>Album: {this.props.album}</Card.Text>
           </Card.Body>
@@ -28,3 +31,4 @@ class SongCard extends React.Component {
 }
 
 export default SongCard;
+// export default withAuth0(SongCard);
