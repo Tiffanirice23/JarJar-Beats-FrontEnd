@@ -22,6 +22,7 @@ class Search extends React.Component {
       artist: '',
       description: '',
       location: '',
+      id: '',
       title: '',
       album: '',
       image: '',
@@ -102,13 +103,15 @@ class Search extends React.Component {
     }
   };
 
+  // postPlaylist = async (playlist) => {
+  //   // add playlist to the database using a post request
+  //   // once it is retrived from data base set it into state
+  //   let playlistURL = 
+
   handleSearchSubmit = async (event) => {
     event.preventDefault();
     this.getArtist();
   }
-
-  //   postPlaylist = async (playlist) => {
-  //     let playlistURL =
   // }
 
   changeArtistInput = (event) => {
@@ -134,6 +137,8 @@ class Search extends React.Component {
       if (doesUserHavePlaylist) {
         console.log('creating new playlist');
         let userPlaylist = {
+          id: '',
+          name: '',
           title: '',
           email: '',
           songs: []
@@ -156,11 +161,12 @@ class Search extends React.Component {
             <Col key={idx} className="mt-4">
           <SongCard
             key={idx}
+            id={artist.id}
             artist={artist}
             title={artist.title}
             album={artist.album}
             image={artist.image}
-            name={this.state.artist}
+            name={artist.name}
             addFavorite={this.addFavorite}
 
           />

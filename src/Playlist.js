@@ -5,9 +5,11 @@ import { withAuth0 } from "@auth0/auth0-react";
 // import { Form } from 'react-bootstrap';
 // import { Card } from 'react-bootstrap';
 // import { Button } from 'react-bootstrap';
-
+import SongCard from './SongCard';
 
 class Playlist extends React.Component {
+
+  // class Playlist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -110,7 +112,34 @@ class Playlist extends React.Component {
 
   componentDidMount() {
     this.getPlaylist();
-}
+  }
+
+  render() {
+    // const { user } = this.props.auth0;
+    console.log(this.props.auth0.user);
+    return (
+      <>
+        <h1>Fav Songs</h1>
+        <SongCard />
+        {/* <Card>
+          <Form>
+            <Card.Title>Playlist</Card.Title>
+            {this.state.favorites.map((favorite, idx) => (
+              <div key={idx}>
+                <Card.Title>{favorite.title}</Card.Title>
+                <Card.Text>{favorite.album}</Card.Text>
+                <Card.Img src={favorite.image} alt="" />
+                <Button
+                  variant="primary"
+                  onClick={() => this.handUpdatePlaylist(idx)}>Update Name</Button>
+                <Playlist user={user} />
+              </div>
+            ))}
+          </Form>
+        </Card> */}
+      </>
+    )
+  }
 }
 
 export default withAuth0(Playlist);
