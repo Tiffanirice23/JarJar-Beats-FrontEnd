@@ -8,8 +8,10 @@
   height: 400px;
   object-fit: cover;
   margin: 10px;
+  transition: 250ms ease;
 }
 
 .profileImg:hover {
   cursor: pointer;
+  transform: scale(1.05);
 }
