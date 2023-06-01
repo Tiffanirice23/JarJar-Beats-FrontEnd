@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Form } from 'react-bootstrap';
+import { Form, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button'
 // import Artist from './Artist.js'
@@ -153,6 +153,7 @@ class Search extends React.Component {
         // if (title && album && image) (
         console.log(artist);
         return (
+            <Col key={idx} className="mt-4">
           <SongCard
             key={idx}
             artist={artist}
@@ -163,6 +164,7 @@ class Search extends React.Component {
             addFavorite={this.addFavorite}
 
           />
+          </Col>
         )
         // ) else (
         //     return null;
