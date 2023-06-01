@@ -16,6 +16,7 @@ class SongCard extends React.Component {
   render() {
 return (
       <>
+
     <Card className='Artist'>
       <Card.Body>
         <Card.Img src={this.props.image}></Card.Img>
