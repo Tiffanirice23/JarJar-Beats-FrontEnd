@@ -64,7 +64,7 @@ class AboutUs extends React.Component {
                         alt="Pic of Jared"
                         onClick={() => this.renderModal({
                             title: 'My name is Jared',
-                            body: 'This is my text body for Andrew',
+                            body: 'Software Enginee Former marine with 7 years working in government and team management. Went to college for communications and have an active secret clearance. Spent 6 years as military police officer. I like cats and sappy movies.',
                         })}
                         className="profileImg"
                     />
