@@ -10,7 +10,7 @@ class Playlist extends React.Component {
                 const res = await this.props.auth0.getIdTokenClaims();
                 const jwt = res.__raw;
                 const config = {
-                    method: 'get',
+                  method: 'get',
                     baseURL: process.env.REACT_APP_SERVER,
                     url: '/playlist',
                     headers: { "Authorization": `Bearer ${jwt}` }
