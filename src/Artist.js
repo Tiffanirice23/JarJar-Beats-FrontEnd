@@ -10,4 +10,3 @@ class Artist extends React.Component {
 }
 
 export default Artist;
-

@@ -7,7 +7,7 @@ import {
   Route
 } from "react-router-dom";
 import Header from './Header'
-import AboutUs from './AboutUs';
+import AboutUs from './AboutUs/index';
 import Search from './Search';
 import Playlist from './Playlist';
 import Artist from './Artist';
