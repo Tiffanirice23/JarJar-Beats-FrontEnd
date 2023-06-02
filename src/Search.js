@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 // import Playlist from './Playlist.js'
 import SongCard from './SongCard.js'
 import { withAuth0 } from '@auth0/auth0-react';
+import JarJarImg from './JarJarBeats.png'
 
 
 class Search extends React.Component {
@@ -107,52 +108,52 @@ class Search extends React.Component {
         userPlaylist: createdPlaylist.data
       });
       console.log(createdPlaylist.data);
-    } catch (error){
+    } catch (error) {
       console.log('error: ', error);
       console.log('error.message: ', error.message);
     }
   }
-    handleSearchSubmit = async (event) => {
-      event.preventDefault();
-      this.getArtist();
+  handleSearchSubmit = async (event) => {
+    event.preventDefault();
+    this.getArtist();
+  }
+
+  changeArtistInput = (event) => {
+    this.setState({
+      artist: event.target.value
+
+    });
+  };
+
+  addFavorite = (songCard) => {
+    const { favorites } = this.state;
+    favorites.push(songCard);
+    this.setState({ favorites });
+  };
+
+  // postPlaylist = ()
+
+  componentDidMount = async () => {
+    if (this.props.auth0.isAuthenticated) {
+      //check to see if user who is logged in has a playlist in the database
+      // if they do have one get playlist will put it in state and return true
+      // await this.getPlaylist();
+
     }
-
-    changeArtistInput = (event) => {
-      this.setState({
-        artist: event.target.value
-
-      });
-    };
-
-    addFavorite = (songCard) => {
-      const { favorites } = this.state;
-      favorites.push(songCard);
-      this.setState({ favorites });
-    };
-
-    // postPlaylist = ()
-
-    componentDidMount = async () => {
-      if (this.props.auth0.isAuthenticated) {
-        //check to see if user who is logged in has a playlist in the database
-        // if they do have one get playlist will put it in state and return true
-        // await this.getPlaylist();
-
-      }
+  }
+  handlePlaylistClick = (event) => {
+    event.preventDefault();
+    console.log('creating new playlist');
+    let userPlaylist = {
+      email: this.props.auth0.user.email,
+      title: 'My Playlist',
+      name: this.props.auth0.user.name,
+      songs: []
     }
-    handlePlaylistClick = (event) => {
-      event.preventDefault();
-      console.log('creating new playlist');
-      let userPlaylist = {
-        email: this.props.auth0.user.email,
-        title: 'My Playlist',
-        name: this.props.auth0.user.name,
-        songs: []
-      }
-      this.postPlaylist(userPlaylist);
-    }
+    this.postPlaylist(userPlaylist);
+  }
 
-   render() {
+  render() {
     // console.log(this.props.auth0.user);
     let songCards = [];
     console.log(this.state.artistData);
@@ -162,47 +163,58 @@ class Search extends React.Component {
         // if (title && album && image) (
         console.log(artist);
         return (
-            <Col key={idx} className="mt-4">
-          <SongCard
-            key={idx}
-            id={artist.id}
-            artist={artist}
-            title={artist.title}
-            album={artist.album}
-            image={artist.image}
-            name={artist.name}
-            addFavorite={this.addFavorite}
+          <Col key={idx} className="mt-4">
+            <SongCard
+              key={idx}
+              id={artist.id}
+              artist={artist}
+              title={artist.title}
+              album={artist.album}
+              image={artist.image}
+              name={artist.name}
+              addFavorite={this.addFavorite}
 
-          />
+            />
           </Col>
         )
         // ) else (
         //     return null;
         // )
-        });
-      }
-      return (
-        <>
-          <header>
-            <h1>Search Your Favorites!!</h1>
+      });
+    }
+    return (
+      <>
+        <header>
+          <img className='JarJar' src={JarJarImg} alt='JarJar' height='200px' />
+          <div>
+
+            <h1>Welcome to Jar Jar Beats!</h1>
+            <p>Build your own personal playlist! Search your favorite artists! Choose your favorite songs!</p>
+            <div className='formDiv'>
+
             <Form onSubmit={this.handleSearchSubmit}>
               <label>
-                <input name="artist" onChange={this.changeArtistInput} />
+                <input className='input' name="artist" onChange={this.changeArtistInput} />
               </label>
               <Button type="submit" className="button">Search</Button>
             </Form>
-            <Button onClick={this.handlePlaylistClick} >Create Playlist!</Button>
-          </header>
+          <Button onClick={this.handlePlaylistClick} >Create Playlist!</Button>
+          </div>
+            </div>
+        </header>
+        <main>
+
           {this.state.error ? <p>{this.state.errorMessage}</p> :
             this.state.haveArtistData &&
-            <main>
+            <div>
               {songCards}
-            </main>
+            </div>
           }
-        </>
-      );
+        </main>
+      </>
+    );
 
-    }
   }
+}
 
 export default withAuth0(Search);
