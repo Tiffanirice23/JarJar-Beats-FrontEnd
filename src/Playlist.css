@@ -2,6 +2,10 @@ li {
   list-style-type: none;
 }
 
+.deleteBtn{
+  margin: 1rem;
+}
+
 /* Button {
  float: right; 
 } */

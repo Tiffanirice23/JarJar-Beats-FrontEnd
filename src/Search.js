@@ -3,15 +3,12 @@ import axios from 'axios';
 import { Form, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button'
-// import Artist from './Artist.js'
-// import Playlist from './Playlist.js'
 import SongCard from './SongCard.js'
 import { withAuth0 } from '@auth0/auth0-react';
 import JarJarImg from './JarJarBeats.png'
 
 
 class Search extends React.Component {
-  // render() {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,10 +28,8 @@ class Search extends React.Component {
     }
   }
   getPlaylist = async () => {
-    // console.log('gettingPlaylist');
     try {
       if (this.props.auth0.isAuthenticated) {
-        // console.log("is loggd in");
         const res = await this.props.auth0.getIdTokenClaims();
         const jwt = res.__raw;
         const config = {
@@ -42,26 +37,20 @@ class Search extends React.Component {
           baseURL: process.env.REACT_APP_SERVER,
           url: `/playlist?email=${this.props.auth0.user.email}`,
           headers: { "Authorization": `Bearer ${jwt}` }
-
         }
-        // console.log(config);
         await axios(config)
           .then(res => this.setState({ userPlaylist: res.data }));
-        // console.log(results.data);
       }
     } catch (err) {
       console.log("nay nay", err.response);
     }
-
   };
-
 
   getArtist = async () => {
     try {
       let artistUrl = `${process.env.REACT_APP_SERVER}/searchSongs?name=${this.state.artist}`;
       console.log('this is the artistUrl: ', artistUrl);
       let artistResponse = await axios.get(artistUrl);
-      // console.log('this is the artistResponse: ', artistResponse);
       let artistData = artistResponse.data;
       this.setState({
         artistData: artistData,
@@ -69,8 +58,6 @@ class Search extends React.Component {
         haveArtistData: true
       })
       console.log('this is the artistData: ', artistData);
-      // console.log('this is the album: ', album);
-      // console.log('this is the artistData: ', artistData);
     } catch (error) {
       console.log('error: ', error);
       console.log('error.message: ', error.message);
@@ -83,29 +70,22 @@ class Search extends React.Component {
 
   postPlaylist = async (userFavorites) => {
     try {
-      // add playlist to the database using a post request
-      // once it is retrived from data base set it into state
-      // let playlistURL = 
-
-      //goes into postPlaylist
-      // Create a new playlist if the user doesn't have one
-
-      const createPlaylistConfig = {
-
-        method: 'post',
-        baseURL: process.env.REACT_APP_SERVER,
-        url: `/playlist?email=${this.props.auth0.user.email}`,
-        // headers: { "Authorization": `Bearer ${jwt}` },
-        data: userFavorites
-
+      if (this.props.auth0.isAuthenticated) {
+        const res = await this.props.auth0.getIdTokenClaims();
+        const jwt = res.__raw;
+        const createPlaylistConfig = {
+          method: 'post',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: `/playlist?email=${this.props.auth0.user.email}`,
+          headers: { "Authorization": `Bearer ${jwt}` },
+          data: userFavorites
+        }
+        let createdPlaylist = await axios(createPlaylistConfig);
+        this.setState({
+          userPlaylist: createdPlaylist.data
+        });
+        console.log(createdPlaylist.data);
       }
-
-
-      let createdPlaylist = await axios(createPlaylistConfig);
-      this.setState({
-        userPlaylist: createdPlaylist.data
-      });
-      console.log(createdPlaylist.data);
     } catch (error) {
       console.log('error: ', error);
       console.log('error.message: ', error.message);
@@ -119,17 +99,11 @@ class Search extends React.Component {
   changeArtistInput = (event) => {
     this.setState({
       artist: event.target.value
-
     });
   };
 
 
   addFavorite = async (songData) => {
-    // const { songs } = this.state.userPlaylist;
-    // // const newFavorites = [...favorites, songCard];
-    // // this.setState({ favorites });
-
-    // songs.push(songData);
     let songToUpdate = {
       name: this.state.userPlaylist.name,
       title: this.state.userPlaylist.title,
@@ -138,7 +112,6 @@ class Search extends React.Component {
       __v: this.state.userPlaylist.__v,
       songs: [...this.state.userPlaylist.songs, songData]
     }
-
     const res = await this.props.auth0.getIdTokenClaims();
     const jwt = res.__raw;
     const config = {
@@ -150,12 +123,11 @@ class Search extends React.Component {
     }
     const result = await axios(config);
     console.log('result', result);
-
     this.setState({
       userPlaylist: songToUpdate
     });
   };
-  
+
 
 
   componentDidMount = async () => {
@@ -179,17 +151,10 @@ class Search extends React.Component {
   }
 
   render() {
-
-   // console.log(this.state.userPlaylist);
-
-    // console.log(this.props.auth0.user);
     let songCards = [];
     console.log(this.state.artistData);
     if (this.state.artistData.length > 0) {
       songCards = this.state.artistData.map((artist, idx) => {
-        // const ( title, album, && image ) = artist;
-        // if (title && album && image) (
-        // console.log(artist);
         return (
           <Col key={idx} className="mt-4">
             <SongCard
@@ -201,13 +166,9 @@ class Search extends React.Component {
               image={artist.image}
               name={artist.name}
               addFavorite={this.addFavorite}
-
             />
           </Col>
         )
-        // ) else (
-        //     return null;
-        // )
       });
     }
     return (
@@ -215,23 +176,20 @@ class Search extends React.Component {
         <header>
           <img className='JarJar' src={JarJarImg} alt='JarJar' height='200px' />
           <div>
-
             <h1>Welcome to Jar Jar Beats, {this.props.auth0?.user?.given_name || 'friend'}!</h1>
             <p>Build your own personal playlist! Search your favorite artists! Choose your favorite songs!</p>
             <div className='formDiv'>
-
-            <Form onSubmit={this.handleSearchSubmit}>
-              <label>
-                <input className='input' name="artist" onChange={this.changeArtistInput} />
-              </label>
-              <Button type="submit" className="button">Search</Button>
-            </Form>
-          <Button onClick={this.handlePlaylistClick} >Create Playlist!</Button>
-          </div>
+              <Form onSubmit={this.handleSearchSubmit}>
+                <label>
+                  <input className='input' name="artist" onChange={this.changeArtistInput} />
+                </label>
+                <Button type="submit" className="button">Search</Button>
+              </Form>
+              <Button onClick={this.handlePlaylistClick} >Create Playlist!</Button>
             </div>
+          </div>
         </header>
         <main>
-
           {this.state.error ? <p>{this.state.errorMessage}</p> :
             this.state.haveArtistData &&
             <div>
@@ -241,7 +199,6 @@ class Search extends React.Component {
         </main>
       </>
     );
-
   }
 }
 
