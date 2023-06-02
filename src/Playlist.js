@@ -163,6 +163,8 @@ class Playlist extends React.Component {
 
 		return (
 			<>
+			<main>
+
 				<h1>Fav Songs</h1>
 				{/* <SongCard /> */}
 				{this.state.userPlaylist.title &&
@@ -184,18 +186,19 @@ class Playlist extends React.Component {
 							className="deleteBtn"
 							variant="primary"
 							onClick={() => this.deletePlaylist()}
-						>Delete</Button>
+							>Delete</Button>
 						{/* <Card.Text>{favorite.album}</Card.Text> */}
 						{/* <Card.Img src={favorite.image} alt="" /> */}
 						{/* <Button
                 variant="primary"
                 onClick={() => this.handleUpdatePlaylist()}
-              >
+								>
                 Update Name
               </Button> */}
 
 					</Card>
 				}
+				</main>
 			</>
 		)
 	}

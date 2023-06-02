@@ -7,18 +7,24 @@
   padding: 20px;
   text-align: center;
 }
-
+div.modal-header{
+  color: black;
+}
+div.modal-body{
+  color: black;
+}
 body {
   color: white;
 }
 
 main {
-  background-image: url('/Users/danielquinn/School/301-code/JarJar-Beats-FrontEnd/public/images/GalaxyMtn.png');
+  background-image: url('../public/images/GalaxyMtn.png');
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   text-align: center;
-  min-height: 700px;
-  
+  min-height: 1000px;
+  padding-bottom: 5rem;
 }
 
 
