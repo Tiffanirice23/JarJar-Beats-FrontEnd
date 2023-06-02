@@ -34,6 +34,7 @@ class Search extends React.Component {
     // console.log('gettingPlaylist');
     try {
       if (this.props.auth0.isAuthenticated) {
+        // console.log("is loggd in");
         const res = await this.props.auth0.getIdTokenClaims();
         const jwt = res.__raw;
         const config = {
@@ -43,14 +44,11 @@ class Search extends React.Component {
           headers: { "Authorization": `Bearer ${jwt}` }
 
         }
-        const results = await axios(config);
+        // console.log(config);
+        await axios(config)
+          .then(res => this.setState({ userPlaylist: res.data }));
         // console.log(results.data);
-        this.setState({
-          userPlaylist: results.data
-        });
       }
-
-
     } catch (err) {
       console.log("nay nay", err.response);
     }
@@ -125,19 +123,46 @@ class Search extends React.Component {
     });
   };
 
-  addFavorite = (songCard) => {
-    const { favorites } = this.state;
-    favorites.push(songCard);
-    this.setState({ favorites });
-  };
 
-  // postPlaylist = ()
+  addFavorite = async (songData) => {
+    // const { songs } = this.state.userPlaylist;
+    // // const newFavorites = [...favorites, songCard];
+    // // this.setState({ favorites });
+
+    // songs.push(songData);
+    let songToUpdate = {
+      name: this.state.userPlaylist.name,
+      title: this.state.userPlaylist.title,
+      email: this.state.userPlaylist.email,
+      _id: this.state.userPlaylist._id,
+      __v: this.state.userPlaylist.__v,
+      songs: [...this.state.userPlaylist.songs, songData]
+    }
+
+    const res = await this.props.auth0.getIdTokenClaims();
+    const jwt = res.__raw;
+    const config = {
+      method: 'put',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/playlist/${songToUpdate._id}`,
+      headers: { "Authorization": `Bearer ${jwt}` },
+      data: songToUpdate
+    }
+    const result = await axios(config);
+    console.log('result', result);
+
+    this.setState({
+      userPlaylist: songToUpdate
+    });
+  };
+  
+
 
   componentDidMount = async () => {
     if (this.props.auth0.isAuthenticated) {
       //check to see if user who is logged in has a playlist in the database
       // if they do have one get playlist will put it in state and return true
-      // await this.getPlaylist();
+      await this.getPlaylist();
 
     }
   }
@@ -154,6 +179,9 @@ class Search extends React.Component {
   }
 
   render() {
+
+   // console.log(this.state.userPlaylist);
+
     // console.log(this.props.auth0.user);
     let songCards = [];
     console.log(this.state.artistData);
@@ -161,7 +189,7 @@ class Search extends React.Component {
       songCards = this.state.artistData.map((artist, idx) => {
         // const ( title, album, && image ) = artist;
         // if (title && album && image) (
-        console.log(artist);
+        // console.log(artist);
         return (
           <Col key={idx} className="mt-4">
             <SongCard
