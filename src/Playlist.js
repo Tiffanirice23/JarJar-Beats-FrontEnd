@@ -1,14 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { withAuth0 } from "@auth0/auth0-react";
-// import search from './search.js'
 import { Card, Button } from 'react-bootstrap';
-// import SongCard from './SongCard';
 import './Playlist.css'
 
 class Playlist extends React.Component {
-
-	// class Playlist extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -22,8 +18,6 @@ class Playlist extends React.Component {
 		console.log('!!!!!', e.target);
 		let playlistToUpdate = {
 			title: e.target.title.value || this.props.playlist.title,
-			// album: e.target.album.value || this.props.album.description,
-			// img: e.target.img || this.props.playlist
 		};
 		this.props.putPlaylist(playlistToUpdate)
 	}
@@ -39,7 +33,6 @@ class Playlist extends React.Component {
 					baseURL: process.env.REACT_APP_SERVER,
 					url: `/playlist?email=${this.props.auth0.user.email}`,
 					headers: { "Authorization": `Bearer ${jwt}` }
-
 				}
 				const results = await axios(config);
 				console.log('result', results.data);
@@ -54,10 +47,6 @@ class Playlist extends React.Component {
 		}
 	}
 
-	postPlaylist = async (newPlaylist) => {
-
-	}
-
 	deletePlaylist = async () => {
 		if (this.props.auth0.isAuthenticated) {
 			const res = await this.props.auth0.getIdTokenClaims();
@@ -67,7 +56,6 @@ class Playlist extends React.Component {
 				baseURL: process.env.REACT_APP_SERVER,
 				url: `/playlist/${this.state.userPlaylist['_id']}`,
 				headers: { "Authorization": `Bearer ${jwt}` }
-
 			}
 			const results = await axios(config);
 			console.log('result', results.data);
@@ -91,7 +79,6 @@ class Playlist extends React.Component {
 						title: playlistToUpdate.title,
 					},
 				};
-
 				const response = await axios(config);
 				console.log(response.data);
 			}
@@ -127,78 +114,38 @@ class Playlist extends React.Component {
 		}
 	}
 
-	// handleUpdatePlaylist = async (index) => {
-	//   const playlistToUpdate = {
-	//     title: 'New Playlist Title', // Replace with the new title
-	//   };
-
-	//   try {
-	//     if (this.props.auth0.isAuthenticated) {
-	//       const res = await this.props.auth0.getIdTokenClaims();
-	//       const jwt = res.__raw;
-	//       const config = {
-	//         method: 'put',
-	//         baseURL: process.env.REACT_APP_SERVER,
-	//         url: '/playlist',
-	//         headers: { "Authorization": `Bearer ${jwt}` },
-	//         data: playlistToUpdate,
-	//       };
-	//       const response = await axios(config);
-	//       console.log(response.data);
-
-	//       // Update the state with the updated playlist
-	//       const updatedFavorites = [...this.state.userPlaylist.songs];
-	//       updatedFavorites[index].title = playlistToUpdate.title;
-	//       this.setState({ userPlaylist: updatedFavorites });
-	//     }
-	//   } catch (err) {
-	//     console.log("Error updating playlist:", err.response);
-	//   }
-	// };
-
 	componentDidMount() {
 		this.getPlaylist();
 	}
 
 	render() {
-
 		return (
 			<>
-			<main>
-				<h1>Welcome, {this.props.auth0?.user?.given_name || 'friend'}!</h1>
-				<h1>Your Favorite Songs</h1>
-				{/* <SongCard /> */}
-				{this.state.userPlaylist.title &&
-					<Card>
-						<Card.Title>{this.state.userPlaylist.title}</Card.Title>
-						<Card.Text>
-							{this.state.userPlaylist.songs.map((song, index) => (
-								<li>
-									{song.title} by {song.name}
-									<Button
-										className="deleteBtn"
-										variant="primary"
-										onClick={() => this.deleteSong(index)}
-									>Delete Song</Button>
-								</li>
-							))}
-						</Card.Text>
-						<Button
-							className="deleteBtn"
-							variant="primary"
-							onClick={() => this.deletePlaylist()}
+				<main>
+					<h1>Welcome, {this.props.auth0?.user?.given_name || 'friend'}!</h1>
+					<h1>Your Favorite Songs</h1>
+					{this.state.userPlaylist.title &&
+						<Card>
+							<Card.Title>{this.state.userPlaylist.title}</Card.Title>
+							<Card.Text>
+								{this.state.userPlaylist.songs.map((song, index) => (
+									<li>
+										{song.title} by {song.name}
+										<Button
+											className="deleteBtn"
+											variant="dark"
+											onClick={() => this.deleteSong(index)}
+										>💀</Button>
+									</li>
+								))}
+							</Card.Text>
+							<Button
+								className="deleteBtn"
+								variant="danger"
+								onClick={() => this.deletePlaylist()}
 							>Delete Playlist</Button>
-						{/* <Card.Text>{favorite.album}</Card.Text> */}
-						{/* <Card.Img src={favorite.image} alt="" /> */}
-						{/* <Button
-                variant="primary"
-                onClick={() => this.handleUpdatePlaylist()}
-								>
-                Update Name
-              </Button> */}
-
-					</Card>
-				}
+						</Card>
+					}
 				</main>
 			</>
 		)

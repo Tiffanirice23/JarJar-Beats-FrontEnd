@@ -1,5 +1,3 @@
-// this mirrors the HornedBeast.js file
-
 import React from "react";
 import Card from "react-bootstrap/Card";
 import './SongCard.css'
@@ -9,7 +7,6 @@ class SongCard extends React.Component {
     super(props);
     this.state = {
       favorites: [],
-      // artist: this.state.artist
     }
   }
 
@@ -19,13 +16,12 @@ class SongCard extends React.Component {
         <Card className='Artist'>
           <Card.Body>
             <Card.Img src={this.props.image}></Card.Img>
- <div className="cardBody">
-            <Card.Title>Song: {this.props.title}</Card.Title>
-            
-            <Card.Title>Artist: {this.props.name}</Card.Title>
-<Card.Title>Album: {this.props.album}</Card.Title> 
- </div>
-<Card.Text onClick={() => this.props.addFavorite(this.props.artist)}>&#9825;</Card.Text>
+            <div className="cardBody">
+              <Card.Title>Song: {this.props.title}</Card.Title>
+              <Card.Title>Artist: {this.props.name}</Card.Title>
+              <Card.Title>Album: {this.props.album}</Card.Title>
+            </div>
+            <Card.Text className="heart-icon" onClick={() => this.props.addFavorite(this.props.artist)}>&#9825;</Card.Text>
           </Card.Body>
         </Card>
       </>
@@ -34,4 +30,3 @@ class SongCard extends React.Component {
 }
 
 export default SongCard;
-// export default withAuth0(SongCard);
