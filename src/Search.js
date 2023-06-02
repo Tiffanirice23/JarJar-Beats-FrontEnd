@@ -216,7 +216,7 @@ class Search extends React.Component {
           <img className='JarJar' src={JarJarImg} alt='JarJar' height='200px' />
           <div>
 
-            <h1>Welcome to Jar Jar Beats!</h1>
+            <h1>Welcome to Jar Jar Beats, {this.props.auth0?.user?.given_name || 'friend'}!</h1>
             <p>Build your own personal playlist! Search your favorite artists! Choose your favorite songs!</p>
             <div className='formDiv'>
 
