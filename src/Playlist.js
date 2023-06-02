@@ -4,6 +4,7 @@ import { withAuth0 } from "@auth0/auth0-react";
 // import search from './search.js'
 import { Card, Button } from 'react-bootstrap';
 // import SongCard from './SongCard';
+import './Playlist.css'
 
 class Playlist extends React.Component {
 
@@ -164,8 +165,8 @@ class Playlist extends React.Component {
 		return (
 			<>
 			<main>
-
-				<h1>Fav Songs</h1>
+				<h1>Welcome, {this.props.auth0?.user?.given_name || 'friend'}!</h1>
+				<h1>Your Favorite Songs</h1>
 				{/* <SongCard /> */}
 				{this.state.userPlaylist.title &&
 					<Card>
@@ -178,7 +179,7 @@ class Playlist extends React.Component {
 										className="deleteBtn"
 										variant="primary"
 										onClick={() => this.deleteSong(index)}
-									>Delete</Button>
+									>Delete Song</Button>
 								</li>
 							))}
 						</Card.Text>
@@ -186,7 +187,7 @@ class Playlist extends React.Component {
 							className="deleteBtn"
 							variant="primary"
 							onClick={() => this.deletePlaylist()}
-							>Delete</Button>
+							>Delete Playlist</Button>
 						{/* <Card.Text>{favorite.album}</Card.Text> */}
 						{/* <Card.Img src={favorite.image} alt="" /> */}
 						{/* <Button

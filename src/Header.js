@@ -16,8 +16,8 @@ class Header extends React.Component {
           {/* These creates a button to specific links */}
           <NavItem><Link to="/" className="nav-link">Home</Link></NavItem>
           {/* <NavItem><Link to="/artist" className="nav-link">artist</Link></NavItem> */}
-          <NavItem><Link to="/playlist" className="nav-link">playlist</Link></NavItem>
-          <NavItem><Link to="/about-us" className="nav-link">about-us</Link></NavItem>
+          <NavItem><Link to="/playlist" className="nav-link">My Playlist</Link></NavItem>
+          <NavItem><Link to="/about-us" className="nav-link">About the Team!</Link></NavItem>
           {this.props.auth0.isAuthenticated ? <Profile /> : <h2>Please login</h2>}
           {this.props.auth0.isAuthenticated ? <LogoutButton /> : <LoginButton />}
         </Navbar>

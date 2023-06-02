@@ -22,6 +22,7 @@ header {
   padding-top: 3rem;
   padding-bottom: 3rem;
   background-color:  rgb(103 100 179);
+  border: 5px groove #86e7f4;
   background-size: cover;
   background-position: center;
   text-align: center;
