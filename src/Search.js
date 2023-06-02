@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 // import Playlist from './Playlist.js'
 import SongCard from './SongCard.js'
 import { withAuth0 } from '@auth0/auth0-react';
+import JarJarImg from './JarJarBeats.png'
 
 
 class Search extends React.Component {
@@ -122,6 +123,7 @@ class Search extends React.Component {
     });
   };
 
+
   addFavorite = async (songData) => {
     // const { songs } = this.state.userPlaylist;
     // // const newFavorites = [...favorites, songCard];
@@ -153,7 +155,8 @@ class Search extends React.Component {
       userPlaylist: songToUpdate
     });
   };
-  // postPlaylist = ()
+  
+
 
   componentDidMount = async () => {
     if (this.props.auth0.isAuthenticated) {
@@ -176,7 +179,9 @@ class Search extends React.Component {
   }
 
   render() {
-    console.log(this.state.userPlaylist);
+
+   // console.log(this.state.userPlaylist);
+
     // console.log(this.props.auth0.user);
     let songCards = [];
     console.log(this.state.artistData);
@@ -208,21 +213,32 @@ class Search extends React.Component {
     return (
       <>
         <header>
-          <h1>Search Your Favorites!!</h1>
-          <Form onSubmit={this.handleSearchSubmit}>
-            <label>
-              <input name="artist" onChange={this.changeArtistInput} />
-            </label>
-            <Button type="submit" className="button">Search</Button>
-          </Form>
+          <img className='JarJar' src={JarJarImg} alt='JarJar' height='200px' />
+          <div>
+
+            <h1>Welcome to Jar Jar Beats!</h1>
+            <p>Build your own personal playlist! Search your favorite artists! Choose your favorite songs!</p>
+            <div className='formDiv'>
+
+            <Form onSubmit={this.handleSearchSubmit}>
+              <label>
+                <input className='input' name="artist" onChange={this.changeArtistInput} />
+              </label>
+              <Button type="submit" className="button">Search</Button>
+            </Form>
           <Button onClick={this.handlePlaylistClick} >Create Playlist!</Button>
+          </div>
+            </div>
         </header>
-        {this.state.error ? <p>{this.state.errorMessage}</p> :
-          this.state.haveArtistData &&
-          <main>
-            {songCards}
-          </main>
-        }
+        <main>
+
+          {this.state.error ? <p>{this.state.errorMessage}</p> :
+            this.state.haveArtistData &&
+            <div>
+              {songCards}
+            </div>
+          }
+        </main>
       </>
     );
 

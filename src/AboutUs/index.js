@@ -64,7 +64,7 @@ class AboutUs extends React.Component {
                         alt="Pic of Jared"
                         onClick={() => this.renderModal({
                             title: 'My name is Jared',
-                            body: 'This is my text body for Andrew',
+                            body: 'Software Enginee Former marine with 7 years working in government and team management. Went to college for communications and have an active secret clearance. Spent 6 years as military police officer. I like cats and sappy movies.',
                         })}
                         className="profileImg"
                     />
@@ -82,8 +82,8 @@ class AboutUs extends React.Component {
                         src="./images/dan.jpeg"
                         alt="Pic of Dan"
                         onClick={() => this.renderModal({
-                            title: 'My name is Dan',
-                            body: 'This is my text body for Dan',
+                            title: 'This is Dan',
+                            body: 'Dan is a 29 year old musician and outdoor enthusiest from Seattle. He plays in a band called The Boards. After 10 years of being a bike messenger in downtown Seattle he decided to switch to a career that wasn\'t so dangerous and allowed him to spend more time with his family and dogs. So far he has made sereral awesome projects with his Codefellows cohort and is exited for the future of his career.',
                         })}
                         className="profileImg"
                     />
