@@ -28,7 +28,10 @@ class App extends React.Component {
           <Routes>
             <Route
               exact path="/"
-              element={this.props.auth0.isAuthenticated ? <Search /> : <p>Mesa Moi Moi happy to see yous!</p>}
+              element={this.props.auth0.isAuthenticated ? <Search /> : 
+              <main>
+              <p>Mesa Moi Moi happy to see yous!</p>
+              </main>}
             > </Route>
             <Route
               path="/artist"
