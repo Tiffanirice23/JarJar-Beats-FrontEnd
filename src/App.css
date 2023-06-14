@@ -43,18 +43,17 @@ main {
 
 .createBtn{
   background-color: rgb(13, 14, 14);
-  border: 1px solid #de3c3c;
   color: rgb(255, 8, 8); 
   font-size: 23px; 
   line-height: 23px; 
   padding: 7px; 
   border-radius: 10px; 
   font-family: Tahoma, Geneva, sans-serif; 
-  font-weight: 700; text-decoration: underline solid rgb(68, 68, 68); 
+  font-weight: 700; 
   font-style: normal; 
   font-variant: normal; 
   text-transform: capitalize; 
-  background-image: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgb(20, 78, 117) 100%); 
+  background-image: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(2, 44, 74) 50%, rgb(61, 25, 25) 100%); 
   box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px; 
   border-top: 4px groove rgba(28, 110, 164, 0.25); 
   border-right: none; 
