@@ -4,6 +4,7 @@
   bottom: 0;
   width: 100%;
   background-color: #F8F8F8;
+  background-image: url('../public/images/GalaxyMtn.png');
   padding: 20px;
   text-align: center;
 }
@@ -15,10 +16,11 @@ div.modal-body{
 }
 body {
   color: white;
+  background-color: rgb(13, 31, 43);
+  
 }
 
 main {
-  background-image: url('../public/images/GalaxyMtn.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -26,5 +28,46 @@ main {
   min-height: 1000px;
   padding-bottom: 5rem;
 }
+.logoutBtn {
+  /* background-image: url('../public/images/GalaxyMtn.png'); */
+  border: 1px solid #de3c3c;
+  color: #FFFFFF;
+  background: #333333;
+  color: #FFFFFF;
+  background: #333333;
+  background-color: rgb(35, 40, 42);
+  margin-left: 0px;
+  float: right;
+  
+}
+
+.createBtn{
+  background-color: rgb(13, 14, 14);
+  border: 1px solid #de3c3c;
+  color: rgb(255, 8, 8); 
+  font-size: 23px; 
+  line-height: 23px; 
+  padding: 7px; 
+  border-radius: 10px; 
+  font-family: Tahoma, Geneva, sans-serif; 
+  font-weight: 700; text-decoration: underline solid rgb(68, 68, 68); 
+  font-style: normal; 
+  font-variant: normal; 
+  text-transform: capitalize; 
+  background-image: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgb(20, 78, 117) 100%); 
+  box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px; 
+  border-top: 4px groove rgba(28, 110, 164, 0.25); 
+  border-right: none; 
+  border-bottom: none; 
+  border-left: none; 
+  border-image: initial; 
+  display: inline-block;}
 
 
+
+.searchBtn{
+  background-color: rgb(18, 18, 18);
+  border: 1px solid #de3c3c;
+  margin: 5px;
+  
+}
