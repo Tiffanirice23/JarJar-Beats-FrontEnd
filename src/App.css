@@ -4,7 +4,6 @@
   bottom: 0;
   width: 100%;
   background-color: #F8F8F8;
-  background-image: url('../public/images/GalaxyMtn.png');
   padding: 20px;
   text-align: center;
 }
@@ -17,7 +16,6 @@ div.modal-body{
 body {
   color: white;
   background-color: rgb(13, 31, 43);
-  
 }
 
 main {
@@ -69,4 +67,21 @@ main {
   border: 1px solid #de3c3c;
   margin: 5px;
   
+}
+
+#record {
+  margin-top: 50px;
+  animation: rotate 2s linear infinite;
+  animation-delay: 0s;
+  width: 500px;
+  height: 500px;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

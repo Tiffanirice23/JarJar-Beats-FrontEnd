@@ -18,13 +18,13 @@ class Header extends React.Component {
     return (
       <>
         <Navbar className="navBar"collapseOnSelect expand="lg" bg="dark" variant="dark">
-          <Navbar.Brand>JarJarBeats</Navbar.Brand>
+          <Navbar.Brand className="nav-Jar">JarJarBeats</Navbar.Brand>
           {/* These creates a button to specific links */}
           <NavItem><Link to="/" className="nav-link">Home</Link></NavItem>
-          {/* <NavItem><Link to="/artist" className="nav-link">artist</Link></NavItem> */}
+          {/* <NavItem><Link to="/artist" className="nav-Jar">artist</Link></NavItem> */}
           <NavItem><Link to="/playlist" className="nav-link">My Playlist</Link></NavItem>
           <NavItem><Link to="/about-us" className="nav-link">About the Team!</Link></NavItem>
-          {this.props.auth0.isAuthenticated ? <Profile className="yourName" /> : <h2>Please login ---> </h2>}
+          {this.props.auth0.isAuthenticated && <Profile className="yourName" />} 
           {this.props.auth0.isAuthenticated ? <LogoutButton /> : <LoginButton />}
         </Navbar>
       </>
