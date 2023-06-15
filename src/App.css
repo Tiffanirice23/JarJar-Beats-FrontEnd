@@ -18,6 +18,7 @@ body {
   background-color: rgb(13, 31, 43);
 }
 
+
 main {
   background-repeat: no-repeat;
   background-size: cover;
@@ -51,7 +52,7 @@ main {
   font-style: normal; 
   font-variant: normal; 
   text-transform: capitalize; 
-  background-image: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(2, 44, 74) 50%, rgb(61, 25, 25) 100%); 
+  /* background-image: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(2, 44, 74) 50%, rgb(61, 25, 25) 100%);  */
   box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px; 
   border-top: 4px groove rgba(28, 110, 164, 0.25); 
   border-right: none; 

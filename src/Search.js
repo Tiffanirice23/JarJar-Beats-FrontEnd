@@ -146,6 +146,7 @@ class Search extends React.Component {
       email: this.props.auth0.user.email,
       title: 'My Playlist',
       name: this.props.auth0.user.name,
+      className: "myPlaylist",
       songs: []
     }
     this.postPlaylist(userPlaylist);

@@ -6,6 +6,45 @@ li {
   margin: 1rem;
 }
 
+.playlistCard {
+  align-items: center;
+}
+
+.playlistCardText {  
+  text-align: center;
+  margin-top: 25px;
+}
+.playlistDeleteBtn {
+  margin: 10px;
+  width: 150px;
+  background-image: url('../public/images/GalaxyMtn.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.playlistTrashBtn {
+  margin-left: 10px;
+}
+
+.playlistTitle {
+  width: 400px;
+  margin-bottom: 15px;
+}
+
+.playlistLI {
+  background-color: rgb(35, 92, 142);
+  color: #e1c640;
+  text-shadow:
+  -1px -1px 0 #000,  
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+   1px 1px 0 #000;
+  font-size: x-large;
+  width: 100%;
+  padding: 10px;
+  
+}
+
 /* Button {
  float: right; 
 } */

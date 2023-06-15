@@ -27,7 +27,9 @@ div.Artist.card {
   margin: 10px;
   /* border-radius: 25px; */
   width: 350px;
-  height: 500px;
+  height: 400px;
+  overflow: auto;
+  /* height: 500px; */
 }
 
 .cardBody {
@@ -36,15 +38,18 @@ div.Artist.card {
 }
 
 .card-img {
-  width: 100%;
-  height: auto;
+  width: 90%;
+  height: 200px;
   object-fit: cover;
 }
 
 .card {
   padding: 10px;
-  background-color:#de3c3c;
+  color:#de3c3c;
+  /* background-image: url('../public/images/GalaxyMtn.png'); */
   border: 3px solid black;
+  height: 50px;
+  background-color: black;
 }
  
 .btn-primary {
@@ -55,8 +60,9 @@ div.Artist.card {
 .heart-icon {
   transition: color 0.3s;
   cursor: pointer;
+  font-size: xx-large;
 }
 
 .heart-icon:hover {
-  color: red;
+  color: rgb(38, 116, 176);
 }

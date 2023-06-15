@@ -121,26 +121,26 @@ class Playlist extends React.Component {
 	render() {
 		return (
 			<>
-				<main>
+				<main className='playlistMain'>
 					<h1>Welcome, {this.props.auth0?.user?.given_name || 'friend'}!</h1>
 					<h1>Your Favorite Songs</h1>
 					{this.state.userPlaylist.title &&
-						<Card>
-							<Card.Title>{this.state.userPlaylist.title}</Card.Title>
-							<Card.Text>
+						<Card className='playlistCard'>
+							<Card.Title className='playlistTitle'>{this.state.userPlaylist.title}</Card.Title>
+							<Card.Text className='playlistCardText'>
 								{this.state.userPlaylist.songs.map((song, index) => (
-									<li>
+									<li className='playlistLI'>
 										{song.title} by {song.name}
 										<Button
-											className="deleteBtn"
+											className="playlistTrashBtn"
 											variant="dark"
 											onClick={() => this.deleteSong(index)}
-										>💀</Button>
+										>🗑️</Button>
 									</li>
 								))}
 							</Card.Text>
 							<Button
-								className="deleteBtn"
+								className="playlistDeleteBtn"
 								variant="danger"
 								onClick={() => this.deletePlaylist()}
 							>Delete Playlist</Button>
