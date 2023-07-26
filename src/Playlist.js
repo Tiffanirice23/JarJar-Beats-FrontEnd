@@ -122,8 +122,8 @@ class Playlist extends React.Component {
 		return (
 			<>
 				<main className='playlistMain'>
-					<h1>Welcome, {this.props.auth0?.user?.given_name || 'friend'}!</h1>
-					<h1>Your Favorite Songs</h1>
+					{/* <h1>Welcome, {this.props.auth0?.user?.given_name || 'friend'}!</h1> */}
+					{/* <h1>Your Favorite Songs</h1> */}
 					{this.state.userPlaylist.title &&
 						<Card className='playlistCard'>
 							<Card.Title className='playlistTitle'>{this.state.userPlaylist.title}</Card.Title>

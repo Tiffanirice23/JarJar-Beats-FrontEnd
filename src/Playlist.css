@@ -8,18 +8,32 @@ li {
 
 .playlistCard {
   align-items: center;
+  background-image: url('../public/images/GalaxyMtn.png');
+  background-size: cover;
+  background-position: center;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 30px;
 }
 
 .playlistCardText {  
   text-align: center;
   margin-top: 25px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  
 }
 .playlistDeleteBtn {
   margin: 10px;
   width: 150px;
-  background-image: url('../public/images/GalaxyMtn.png');
+  /* background-image: url('../public/images/GalaxyMtn.png'); */
+  background-color: red;
   background-size: cover;
   background-position: center;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 
 .playlistTrashBtn {
@@ -27,8 +41,14 @@ li {
 }
 
 .playlistTitle {
-  width: 400px;
+  width: 200px;
   margin-bottom: 15px;
+  text-shadow:
+  -1px -1px 0 #000,  
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+   1px 1px 0 #000;
+
 }
 
 .playlistLI {

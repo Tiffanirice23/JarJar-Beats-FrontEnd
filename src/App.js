@@ -30,7 +30,7 @@ class App extends React.Component {
               exact path="/"
               element={this.props.auth0.isAuthenticated ? <Search /> : 
               <main>
-                <p> Loading... Please Login to View</p>
+                <p id="loading"> Loading... Please Login to View</p>
                 <img id='record' src='/images/JarJarRecord.png' alt="JarJar Record" />
               </main>}
             > </Route>

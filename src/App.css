@@ -71,11 +71,10 @@ main {
 }
 
 #record {
-  margin-top: 50px;
   animation: rotate 2s linear infinite;
   animation-delay: 0s;
-  width: 500px;
-  height: 500px;
+  width: 480px;
+  height: 480px;
 }
 
 @keyframes rotate {
@@ -85,4 +84,8 @@ main {
   100% {
     transform: rotate(360deg);
   }
+}
+
+#loading {
+  padding: 15px;
 }

@@ -1,30 +1,31 @@
 .mt-4 {
   margin: auto 0;
-  margin-left: 15px;
-  margin-right: 5px;
+  margin-left: 25px;
+  margin-right: 25px;
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* border: 4px solid red; */
-  border-top: 4px grooved rgb(99, 192, 245);
-  animation: glowingBorder 6s infinite;
+  border: 1px solid rgb(245, 126, 99);
+  animation: glowingBorder 60s infinite;
+
+
 }
 
 @keyframes glowingBorder {
   0% {
-    box-shadow: 0 0 5px rgb(99, 192, 245);
+    box-shadow: 0 0 3px rgb(239, 58, 58);
   }
   50% {
-    box-shadow: 0 0 20px rgb(99, 192, 245);
+    box-shadow: 0 0 20px rgb(245, 126, 99);
   }
   100% {
-    box-shadow: 0 0 5px rgb(99, 192, 245);
+    box-shadow: 0 0 15px rgb(245, 165, 99);
   }
 
 }
 
 div.Artist.card {
-  margin: 10px;
+  margin: 30px;
   /* border-radius: 25px; */
   width: 350px;
   height: 400px;
@@ -47,9 +48,11 @@ div.Artist.card {
   padding: 10px;
   color:#de3c3c;
   /* background-image: url('../public/images/GalaxyMtn.png'); */
-  border: 3px solid black;
   height: 50px;
   background-color: black;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
  
 .btn-primary {
